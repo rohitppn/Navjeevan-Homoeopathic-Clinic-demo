@@ -143,12 +143,12 @@ section { padding: var(--section-y) 0; position: relative; }
 .brand:hover { transform: translateY(-1px); }
 
 .brand-logo {
-  height: 56px;
+  height: 78px;
   width: auto;
   display: block;
   transition: all 0.3s var(--ease);
 }
-.nav.scrolled .brand-logo { height: 46px; }
+.nav.scrolled .brand-logo { height: 62px; }
 
 /* Legacy fallback if brand-mark/text still used */
 .brand-mark {
@@ -818,6 +818,94 @@ section { padding: var(--section-y) 0; position: relative; }
   margin-right: auto;
 }
 
+/* Swiper carousel for reels */
+.reels-swiper {
+  margin-top: 50px;
+  padding: 0 50px 60px;
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.reels-swiper .swiper-slide.reel-card {
+  height: auto;
+  width: 320px;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+/* Pagination dots — light on dark sage bg */
+.reels-swiper .swiper-pagination.reels-dots {
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.reels-swiper .swiper-pagination-bullet {
+  width: 8px; height: 8px;
+  background: rgba(250, 247, 242, 0.3);
+  opacity: 1;
+  transition: all 0.3s var(--ease);
+}
+.reels-swiper .swiper-pagination-bullet-active {
+  background: var(--leaf);
+  width: 28px;
+  border-radius: 999px;
+}
+
+/* Nav arrows — light style for dark sage bg */
+.reels-swiper .swiper-button-next,
+.reels-swiper .swiper-button-prev {
+  width: 46px; height: 46px;
+  background: rgba(250, 247, 242, 0.1);
+  border: 1px solid rgba(250, 247, 242, 0.2);
+  border-radius: 50%;
+  color: var(--cream);
+  backdrop-filter: blur(6px);
+  transition: all 0.3s var(--ease);
+  top: 50%;
+  margin-top: -23px;
+}
+.reels-swiper .swiper-button-next:hover,
+.reels-swiper .swiper-button-prev:hover {
+  background: var(--leaf);
+  color: var(--sage-deep);
+  border-color: var(--leaf);
+}
+.reels-swiper .swiper-button-next::after,
+.reels-swiper .swiper-button-prev::after {
+  font-size: 16px;
+  font-weight: 700;
+}
+.reels-swiper .swiper-button-next { right: 4px; }
+.reels-swiper .swiper-button-prev { left: 4px; }
+
+/* Reel iframe must fill its slide */
+.reels-swiper .reel-card iframe {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: 22px;
+}
+
+/* "Open in Instagram" floating link on each reel card */
+.reel-open {
+  position: absolute;
+  top: 12px; right: 12px;
+  z-index: 5;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  display: grid; place-items: center;
+  color: var(--sage-deep);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+  pointer-events: auto;
+}
+.reel-card:hover .reel-open { opacity: 1; transform: translateY(-2px); }
+.reel-open svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; }
+
 .reel-card {
   background: var(--cream);
   border-radius: 22px;
@@ -1469,6 +1557,8 @@ html.js-ready .reveal.in > span { transform: translateY(0); }
   .reels-grid { grid-template-columns: repeat(2, 1fr); max-width: 760px; }
   .reels-grid .reel-card:last-child { grid-column: 1 / -1; max-width: 360px; margin: 0 auto; width: 100%; }
   .reel-card { height: 660px; }
+  .reels-swiper { padding: 0 20px 60px; }
+  .reels-swiper .swiper-button-next, .reels-swiper .swiper-button-prev { display: none; }
   .conditions-grid { grid-template-columns: repeat(2, 1fr); }
   .process-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
   .testimonials-grid { grid-template-columns: 1fr; }
@@ -1485,8 +1575,8 @@ html.js-ready .reveal.in > span { transform: translateY(0); }
 @media (max-width: 720px) {
   body { font-size: 16px; }
   .nav-links { display: none; }
-  .brand-logo { height: 44px; }
-  .nav.scrolled .brand-logo { height: 38px; }
+  .brand-logo { height: 58px; }
+  .nav.scrolled .brand-logo { height: 48px; }
   .nav-cta { display: none; } /* mobile uses hamburger + WA in menu */
   .footer-logo { height: 58px; }
   .menu-toggle {
